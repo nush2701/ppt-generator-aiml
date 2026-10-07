@@ -1,0 +1,65 @@
+{
+  "experiment_id": "exp-8a5f09ceec7246938b6629100bc327e9",
+  "number_of_cases": 10,
+  "number_of_prepared_presentations": 20,
+  "number_of_evaluated_presentations": 0,
+  "number_of_evaluators": 0,
+  "selective_metrics": {
+    "rating_count": 0,
+    "average_relevance": null,
+    "average_completeness": null,
+    "average_consistency": null,
+    "average_readability": null,
+    "average_layout_suitability": null,
+    "average_requirement_adherence": null,
+    "overall_average_quality_score": null,
+    "median_overall_quality": null,
+    "standard_deviation_overall_quality": null
+  },
+  "full_metrics": {
+    "rating_count": 0,
+    "average_relevance": null,
+    "average_completeness": null,
+    "average_consistency": null,
+    "average_readability": null,
+    "average_layout_suitability": null,
+    "average_requirement_adherence": null,
+    "overall_average_quality_score": null,
+    "median_overall_quality": null,
+    "standard_deviation_overall_quality": null
+  },
+  "quality_difference": {
+    "selective_minus_full": null,
+    "absolute_difference": null,
+    "within_0_5_observed_difference": null,
+    "dimension_differences": {
+      "relevance": {
+        "selective_minus_full": null,
+        "absolute_difference": null
+      },
+      "completeness": {
+        "selective_minus_full": null,
+        "absolute_difference": null
+      },
+      "consistency": {
+        "selective_minus_full": null,
+        "absolute_difference": null
+      },
+      "readability": {
+        "selective_minus_full": null,
+        "absolute_difference": null
+      },
+      "layout_suitability": {
+        "selective_minus_full": null,
+        "absolute_difference": null
+      },
+      "requirement_adherence": {
+        "selective_minus_full": null,
+        "absolute_difference": null
+      }
+    }
+  },
+  "evaluation_status": "pending_human_ratings",
+  "ratings_are_human_entered": true,
+  "statistical_significance_tested": false
+}

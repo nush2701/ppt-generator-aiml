@@ -1,0 +1,42 @@
+# Environment secrets
+.env
+.env.*
+!.env.example
+!**/.env.example
+frontend/.env.local
+
+# Private keys and credential files
+*.pem
+*.key
+*.p12
+*.pfx
+credentials.json
+secrets.json
+
+# Generated PowerPoint files stay local
+*.pptx
+
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+.venv/
+venv/
+*.egg-info/
+.pytest_cache/
+
+# Node / Next.js
+node_modules/
+.next/
+out/
+*.tsbuildinfo
+
+# Generated output and local tooling
+generated/*
+**/generated/*.pptx
+**/generated/*.json
+**/generated/metrics.jsonl
+**/generated/metrics_test_*.jsonl
+!.gitkeep
+.DS_Store
+Thumbs.db

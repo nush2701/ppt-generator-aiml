@@ -1,0 +1,50 @@
+{
+  "experiment_name": "selective_vs_full_regeneration_mvp",
+  "presentation_cases": [
+    {
+      "case_id": "renewable_energy",
+      "prompt": "Create a professional 5-slide presentation introducing renewable energy to a general audience. Explain the main sources, compare solar and wind, cover benefits and practical challenges, and conclude with a balanced takeaway.",
+      "modifications": [
+        {"case_id": "renewable_energy_local_content", "kind": "localized_content", "prompt": "Change slide 3 to compare solar and wind energy using clear, concise points."},
+        {"case_id": "renewable_energy_local_structure", "kind": "localized_structural_content", "prompt": "Restructure slide 4 into a concise list of the main benefits and practical challenges of renewable energy."},
+        {"case_id": "renewable_energy_global", "kind": "global", "prompt": "Make the entire presentation more professional and suitable for a university seminar."}
+      ]
+    },
+    {
+      "case_id": "ai_healthcare",
+      "prompt": "Create a professional 5-slide presentation about AI in healthcare for college students. Introduce the topic, explain diagnostic applications, discuss benefits and limitations, and conclude with responsible-use considerations.",
+      "modifications": [
+        {"case_id": "ai_healthcare_local_content", "kind": "localized_content", "prompt": "Change slide 3 to focus more on diagnostic AI in healthcare."},
+        {"case_id": "ai_healthcare_local_structure", "kind": "localized_structural_content", "prompt": "Restructure slide 4 as a concise comparison of healthcare AI benefits and limitations."},
+        {"case_id": "ai_healthcare_global", "kind": "global", "prompt": "Make the entire presentation more suitable for a university seminar."}
+      ]
+    },
+    {
+      "case_id": "cybersecurity_awareness",
+      "prompt": "Create a practical 5-slide cybersecurity awareness presentation for everyday computer and smartphone users. Cover common threats, safe habits, account protection, and a concise conclusion.",
+      "modifications": [
+        {"case_id": "cybersecurity_local_content", "kind": "localized_content", "prompt": "Change slide 3 to explain how to recognize phishing attempts."},
+        {"case_id": "cybersecurity_local_structure", "kind": "localized_structural_content", "prompt": "Restructure slide 4 into a short step-by-step checklist for protecting online accounts."},
+        {"case_id": "cybersecurity_global", "kind": "global", "prompt": "Make the entire presentation more concise and action-oriented for a general audience."}
+      ]
+    },
+    {
+      "case_id": "sustainable_ecommerce",
+      "prompt": "Create a balanced 5-slide presentation about sustainable e-commerce for business students. Explain the environmental impact, responsible packaging and delivery options, business trade-offs, and a conclusion.",
+      "modifications": [
+        {"case_id": "sustainable_ecommerce_local_content", "kind": "localized_content", "prompt": "Change slide 3 to focus on lower-impact packaging options for e-commerce."},
+        {"case_id": "sustainable_ecommerce_local_structure", "kind": "localized_structural_content", "prompt": "Restructure slide 4 to compare the benefits and trade-offs of sustainable delivery choices."},
+        {"case_id": "sustainable_ecommerce_global", "kind": "global", "prompt": "Make the entire presentation more persuasive while keeping a balanced, evidence-conscious tone."}
+      ]
+    },
+    {
+      "case_id": "future_of_education",
+      "prompt": "Create a thoughtful 5-slide presentation about the future of education for college students. Cover technology-enabled learning, changing educator roles, access and equity, and a concise conclusion.",
+      "modifications": [
+        {"case_id": "future_education_local_content", "kind": "localized_content", "prompt": "Change slide 3 to focus on how technology can support personalized learning."},
+        {"case_id": "future_education_local_structure", "kind": "localized_structural_content", "prompt": "Restructure slide 4 as a comparison of opportunities and equity challenges in future education."},
+        {"case_id": "future_education_global", "kind": "global", "prompt": "Make the entire presentation more suitable for a college audience and emphasize practical implications."}
+      ]
+    }
+  ]
+}

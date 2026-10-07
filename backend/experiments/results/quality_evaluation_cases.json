@@ -1,0 +1,365 @@
+{
+  "experiment_id": "exp-8a5f09ceec7246938b6629100bc327e9",
+  "cases": [
+    {
+      "evaluation_id": "eval-e32710a773f147668e8c",
+      "experiment_id": "exp-8a5f09ceec7246938b6629100bc327e9",
+      "case_id": "ai_healthcare_local_content",
+      "presentation_case_id": "ai_healthcare",
+      "modification_request": "Change slide 3 to focus more on diagnostic AI in healthcare.",
+      "method": "selective",
+      "original_presentation_id": "exp-8a5f09ceec7246938b6629100bc327e9-ai_healthcare",
+      "output_pptx_path": "C:\\CSE\\final_year\\aimlt\\ppt-generator\\backend\\generated\\selective_regeneration_b41b7b88f6b547fbb43d1b953bee4872.pptx",
+      "affected_slide_ids": [
+        "slide-3"
+      ],
+      "quality_status": "pending",
+      "blinded_pptx_path": "C:\\CSE\\final_year\\aimlt\\ppt-generator\\backend\\experiments\\results\\quality_presentations\\eval-e32710a773f147668e8c_version-a.pptx",
+      "original_pptx_path": "C:\\CSE\\final_year\\aimlt\\ppt-generator\\backend\\experiments\\results\\quality_presentations\\ai_healthcare_original.pptx"
+    },
+    {
+      "evaluation_id": "eval-cd3eeb7879bd4247993c",
+      "experiment_id": "exp-8a5f09ceec7246938b6629100bc327e9",
+      "case_id": "ai_healthcare_local_content",
+      "presentation_case_id": "ai_healthcare",
+      "modification_request": "Change slide 3 to focus more on diagnostic AI in healthcare.",
+      "method": "full",
+      "original_presentation_id": "exp-8a5f09ceec7246938b6629100bc327e9-ai_healthcare",
+      "output_pptx_path": "C:\\CSE\\final_year\\aimlt\\ppt-generator\\backend\\generated\\full_regeneration_35ac6ecd7ef3460cb2215ddc5b75a9ed.pptx",
+      "affected_slide_ids": [
+        "slide-1",
+        "slide-2",
+        "slide-3",
+        "slide-4",
+        "slide-5"
+      ],
+      "quality_status": "pending",
+      "blinded_pptx_path": "C:\\CSE\\final_year\\aimlt\\ppt-generator\\backend\\experiments\\results\\quality_presentations\\eval-cd3eeb7879bd4247993c_version-b.pptx",
+      "original_pptx_path": "C:\\CSE\\final_year\\aimlt\\ppt-generator\\backend\\experiments\\results\\quality_presentations\\ai_healthcare_original.pptx"
+    },
+    {
+      "evaluation_id": "eval-e506697ed86547e6a5e5",
+      "experiment_id": "exp-8a5f09ceec7246938b6629100bc327e9",
+      "case_id": "ai_healthcare_local_structure",
+      "presentation_case_id": "ai_healthcare",
+      "modification_request": "Restructure slide 4 as a concise comparison of healthcare AI benefits and limitations.",
+      "method": "selective",
+      "original_presentation_id": "exp-8a5f09ceec7246938b6629100bc327e9-ai_healthcare",
+      "output_pptx_path": "C:\\CSE\\final_year\\aimlt\\ppt-generator\\backend\\generated\\selective_regeneration_14132e5e61da450c96c2f376897f036e.pptx",
+      "affected_slide_ids": [
+        "slide-4"
+      ],
+      "quality_status": "pending",
+      "blinded_pptx_path": "C:\\CSE\\final_year\\aimlt\\ppt-generator\\backend\\experiments\\results\\quality_presentations\\eval-e506697ed86547e6a5e5_version-a.pptx",
+      "original_pptx_path": "C:\\CSE\\final_year\\aimlt\\ppt-generator\\backend\\experiments\\results\\quality_presentations\\ai_healthcare_original.pptx"
+    },
+    {
+      "evaluation_id": "eval-85f817b53a30408fb490",
+      "experiment_id": "exp-8a5f09ceec7246938b6629100bc327e9",
+      "case_id": "ai_healthcare_local_structure",
+      "presentation_case_id": "ai_healthcare",
+      "modification_request": "Restructure slide 4 as a concise comparison of healthcare AI benefits and limitations.",
+      "method": "full",
+      "original_presentation_id": "exp-8a5f09ceec7246938b6629100bc327e9-ai_healthcare",
+      "output_pptx_path": "C:\\CSE\\final_year\\aimlt\\ppt-generator\\backend\\generated\\full_regeneration_d78af8fb0c2144c7a7bf9db3db445933.pptx",
+      "affected_slide_ids": [
+        "slide-1",
+        "slide-2",
+        "slide-3",
+        "slide-4",
+        "slide-5"
+      ],
+      "quality_status": "pending",
+      "blinded_pptx_path": "C:\\CSE\\final_year\\aimlt\\ppt-generator\\backend\\experiments\\results\\quality_presentations\\eval-85f817b53a30408fb490_version-b.pptx",
+      "original_pptx_path": "C:\\CSE\\final_year\\aimlt\\ppt-generator\\backend\\experiments\\results\\quality_presentations\\ai_healthcare_original.pptx"
+    },
+    {
+      "evaluation_id": "eval-85aebd130a564cfa8b89",
+      "experiment_id": "exp-8a5f09ceec7246938b6629100bc327e9",
+      "case_id": "cybersecurity_local_content",
+      "presentation_case_id": "cybersecurity_awareness",
+      "modification_request": "Change slide 3 to explain how to recognize phishing attempts.",
+      "method": "selective",
+      "original_presentation_id": "exp-8a5f09ceec7246938b6629100bc327e9-cybersecurity_awareness",
+      "output_pptx_path": "C:\\CSE\\final_year\\aimlt\\ppt-generator\\backend\\generated\\selective_regeneration_dbed451082da492bbc75accd8f0ab1e3.pptx",
+      "affected_slide_ids": [
+        "slide-3"
+      ],
+      "quality_status": "pending",
+      "blinded_pptx_path": "C:\\CSE\\final_year\\aimlt\\ppt-generator\\backend\\experiments\\results\\quality_presentations\\eval-85aebd130a564cfa8b89_version-b.pptx",
+      "original_pptx_path": "C:\\CSE\\final_year\\aimlt\\ppt-generator\\backend\\experiments\\results\\quality_presentations\\cybersecurity_awareness_original.pptx"
+    },
+    {
+      "evaluation_id": "eval-c3bf5b2d1dc24fc88705",
+      "experiment_id": "exp-8a5f09ceec7246938b6629100bc327e9",
+      "case_id": "cybersecurity_local_content",
+      "presentation_case_id": "cybersecurity_awareness",
+      "modification_request": "Change slide 3 to explain how to recognize phishing attempts.",
+      "method": "full",
+      "original_presentation_id": "exp-8a5f09ceec7246938b6629100bc327e9-cybersecurity_awareness",
+      "output_pptx_path": "C:\\CSE\\final_year\\aimlt\\ppt-generator\\backend\\generated\\full_regeneration_70e83fa33c404979990ef904d7774fa7.pptx",
+      "affected_slide_ids": [
+        "slide-1",
+        "slide-2",
+        "slide-3",
+        "slide-4",
+        "slide-5"
+      ],
+      "quality_status": "pending",
+      "blinded_pptx_path": "C:\\CSE\\final_year\\aimlt\\ppt-generator\\backend\\experiments\\results\\quality_presentations\\eval-c3bf5b2d1dc24fc88705_version-a.pptx",
+      "original_pptx_path": "C:\\CSE\\final_year\\aimlt\\ppt-generator\\backend\\experiments\\results\\quality_presentations\\cybersecurity_awareness_original.pptx"
+    },
+    {
+      "evaluation_id": "eval-f2598675195f4e14b2d9",
+      "experiment_id": "exp-8a5f09ceec7246938b6629100bc327e9",
+      "case_id": "cybersecurity_local_structure",
+      "presentation_case_id": "cybersecurity_awareness",
+      "modification_request": "Restructure slide 4 into a short step-by-step checklist for protecting online accounts.",
+      "method": "selective",
+      "original_presentation_id": "exp-8a5f09ceec7246938b6629100bc327e9-cybersecurity_awareness",
+      "output_pptx_path": "C:\\CSE\\final_year\\aimlt\\ppt-generator\\backend\\generated\\selective_regeneration_6e5b1f7cf50a4e84a0f68ca7067d4c29.pptx",
+      "affected_slide_ids": [
+        "slide-4"
+      ],
+      "quality_status": "pending",
+      "blinded_pptx_path": "C:\\CSE\\final_year\\aimlt\\ppt-generator\\backend\\experiments\\results\\quality_presentations\\eval-f2598675195f4e14b2d9_version-b.pptx",
+      "original_pptx_path": "C:\\CSE\\final_year\\aimlt\\ppt-generator\\backend\\experiments\\results\\quality_presentations\\cybersecurity_awareness_original.pptx"
+    },
+    {
+      "evaluation_id": "eval-d092ae6328d2469cbd08",
+      "experiment_id": "exp-8a5f09ceec7246938b6629100bc327e9",
+      "case_id": "cybersecurity_local_structure",
+      "presentation_case_id": "cybersecurity_awareness",
+      "modification_request": "Restructure slide 4 into a short step-by-step checklist for protecting online accounts.",
+      "method": "full",
+      "original_presentation_id": "exp-8a5f09ceec7246938b6629100bc327e9-cybersecurity_awareness",
+      "output_pptx_path": "C:\\CSE\\final_year\\aimlt\\ppt-generator\\backend\\generated\\full_regeneration_eb2279bc616843a0aa44e7fc76ea91c5.pptx",
+      "affected_slide_ids": [
+        "slide-1",
+        "slide-2",
+        "slide-3",
+        "slide-4",
+        "slide-5"
+      ],
+      "quality_status": "pending",
+      "blinded_pptx_path": "C:\\CSE\\final_year\\aimlt\\ppt-generator\\backend\\experiments\\results\\quality_presentations\\eval-d092ae6328d2469cbd08_version-a.pptx",
+      "original_pptx_path": "C:\\CSE\\final_year\\aimlt\\ppt-generator\\backend\\experiments\\results\\quality_presentations\\cybersecurity_awareness_original.pptx"
+    },
+    {
+      "evaluation_id": "eval-c6994374b2424b39ab6c",
+      "experiment_id": "exp-8a5f09ceec7246938b6629100bc327e9",
+      "case_id": "future_education_local_content",
+      "presentation_case_id": "future_of_education",
+      "modification_request": "Change slide 3 to focus on how technology can support personalized learning.",
+      "method": "selective",
+      "original_presentation_id": "exp-8a5f09ceec7246938b6629100bc327e9-future_of_education",
+      "output_pptx_path": "C:\\CSE\\final_year\\aimlt\\ppt-generator\\backend\\generated\\selective_regeneration_1dd1602249e245aa90925525272789fb.pptx",
+      "affected_slide_ids": [
+        "slide-3"
+      ],
+      "quality_status": "pending",
+      "blinded_pptx_path": "C:\\CSE\\final_year\\aimlt\\ppt-generator\\backend\\experiments\\results\\quality_presentations\\eval-c6994374b2424b39ab6c_version-a.pptx",
+      "original_pptx_path": "C:\\CSE\\final_year\\aimlt\\ppt-generator\\backend\\experiments\\results\\quality_presentations\\future_of_education_original.pptx"
+    },
+    {
+      "evaluation_id": "eval-72859f4334134a67ae60",
+      "experiment_id": "exp-8a5f09ceec7246938b6629100bc327e9",
+      "case_id": "future_education_local_content",
+      "presentation_case_id": "future_of_education",
+      "modification_request": "Change slide 3 to focus on how technology can support personalized learning.",
+      "method": "full",
+      "original_presentation_id": "exp-8a5f09ceec7246938b6629100bc327e9-future_of_education",
+      "output_pptx_path": "C:\\CSE\\final_year\\aimlt\\ppt-generator\\backend\\generated\\full_regeneration_dfdd4317021f4a3891300b7c65d7a05c.pptx",
+      "affected_slide_ids": [
+        "slide-1",
+        "slide-2",
+        "slide-3",
+        "slide-4",
+        "slide-5"
+      ],
+      "quality_status": "pending",
+      "blinded_pptx_path": "C:\\CSE\\final_year\\aimlt\\ppt-generator\\backend\\experiments\\results\\quality_presentations\\eval-72859f4334134a67ae60_version-b.pptx",
+      "original_pptx_path": "C:\\CSE\\final_year\\aimlt\\ppt-generator\\backend\\experiments\\results\\quality_presentations\\future_of_education_original.pptx"
+    },
+    {
+      "evaluation_id": "eval-e687642d891c4469813d",
+      "experiment_id": "exp-8a5f09ceec7246938b6629100bc327e9",
+      "case_id": "future_education_local_structure",
+      "presentation_case_id": "future_of_education",
+      "modification_request": "Restructure slide 4 as a comparison of opportunities and equity challenges in future education.",
+      "method": "selective",
+      "original_presentation_id": "exp-8a5f09ceec7246938b6629100bc327e9-future_of_education",
+      "output_pptx_path": "C:\\CSE\\final_year\\aimlt\\ppt-generator\\backend\\generated\\selective_regeneration_cea96783f8fb4808b436a4f3c0111805.pptx",
+      "affected_slide_ids": [
+        "slide-4"
+      ],
+      "quality_status": "pending",
+      "blinded_pptx_path": "C:\\CSE\\final_year\\aimlt\\ppt-generator\\backend\\experiments\\results\\quality_presentations\\eval-e687642d891c4469813d_version-a.pptx",
+      "original_pptx_path": "C:\\CSE\\final_year\\aimlt\\ppt-generator\\backend\\experiments\\results\\quality_presentations\\future_of_education_original.pptx"
+    },
+    {
+      "evaluation_id": "eval-d5e17761bacf42e0947b",
+      "experiment_id": "exp-8a5f09ceec7246938b6629100bc327e9",
+      "case_id": "future_education_local_structure",
+      "presentation_case_id": "future_of_education",
+      "modification_request": "Restructure slide 4 as a comparison of opportunities and equity challenges in future education.",
+      "method": "full",
+      "original_presentation_id": "exp-8a5f09ceec7246938b6629100bc327e9-future_of_education",
+      "output_pptx_path": "C:\\CSE\\final_year\\aimlt\\ppt-generator\\backend\\generated\\full_regeneration_27b4f9974bc2429dbde48df4fdc1b0f1.pptx",
+      "affected_slide_ids": [
+        "slide-1",
+        "slide-2",
+        "slide-3",
+        "slide-4",
+        "slide-5"
+      ],
+      "quality_status": "pending",
+      "blinded_pptx_path": "C:\\CSE\\final_year\\aimlt\\ppt-generator\\backend\\experiments\\results\\quality_presentations\\eval-d5e17761bacf42e0947b_version-b.pptx",
+      "original_pptx_path": "C:\\CSE\\final_year\\aimlt\\ppt-generator\\backend\\experiments\\results\\quality_presentations\\future_of_education_original.pptx"
+    },
+    {
+      "evaluation_id": "eval-c6b8992a48204b0ea3a4",
+      "experiment_id": "exp-8a5f09ceec7246938b6629100bc327e9",
+      "case_id": "renewable_energy_local_content",
+      "presentation_case_id": "renewable_energy",
+      "modification_request": "Change slide 3 to compare solar and wind energy using clear, concise points.",
+      "method": "selective",
+      "original_presentation_id": "exp-8a5f09ceec7246938b6629100bc327e9-renewable_energy",
+      "output_pptx_path": "C:\\CSE\\final_year\\aimlt\\ppt-generator\\backend\\generated\\selective_regeneration_d94622cbde0e419f8e36f9afb154d9dd.pptx",
+      "affected_slide_ids": [
+        "slide-3"
+      ],
+      "quality_status": "pending",
+      "blinded_pptx_path": "C:\\CSE\\final_year\\aimlt\\ppt-generator\\backend\\experiments\\results\\quality_presentations\\eval-c6b8992a48204b0ea3a4_version-b.pptx",
+      "original_pptx_path": "C:\\CSE\\final_year\\aimlt\\ppt-generator\\backend\\experiments\\results\\quality_presentations\\renewable_energy_original.pptx"
+    },
+    {
+      "evaluation_id": "eval-229a8f0a40914379b668",
+      "experiment_id": "exp-8a5f09ceec7246938b6629100bc327e9",
+      "case_id": "renewable_energy_local_content",
+      "presentation_case_id": "renewable_energy",
+      "modification_request": "Change slide 3 to compare solar and wind energy using clear, concise points.",
+      "method": "full",
+      "original_presentation_id": "exp-8a5f09ceec7246938b6629100bc327e9-renewable_energy",
+      "output_pptx_path": "C:\\CSE\\final_year\\aimlt\\ppt-generator\\backend\\generated\\full_regeneration_ada839f11bf74e7e8baa19bcf2e8a728.pptx",
+      "affected_slide_ids": [
+        "slide-1",
+        "slide-2",
+        "slide-3",
+        "slide-4",
+        "slide-5"
+      ],
+      "quality_status": "pending",
+      "blinded_pptx_path": "C:\\CSE\\final_year\\aimlt\\ppt-generator\\backend\\experiments\\results\\quality_presentations\\eval-229a8f0a40914379b668_version-a.pptx",
+      "original_pptx_path": "C:\\CSE\\final_year\\aimlt\\ppt-generator\\backend\\experiments\\results\\quality_presentations\\renewable_energy_original.pptx"
+    },
+    {
+      "evaluation_id": "eval-c564fff0fbfc4e00bd46",
+      "experiment_id": "exp-8a5f09ceec7246938b6629100bc327e9",
+      "case_id": "renewable_energy_local_structure",
+      "presentation_case_id": "renewable_energy",
+      "modification_request": "Restructure slide 4 into a concise list of the main benefits and practical challenges of renewable energy.",
+      "method": "selective",
+      "original_presentation_id": "exp-8a5f09ceec7246938b6629100bc327e9-renewable_energy",
+      "output_pptx_path": "C:\\CSE\\final_year\\aimlt\\ppt-generator\\backend\\generated\\selective_regeneration_f1f7507738f34aed83e15555ca68c798.pptx",
+      "affected_slide_ids": [
+        "slide-4"
+      ],
+      "quality_status": "pending",
+      "blinded_pptx_path": "C:\\CSE\\final_year\\aimlt\\ppt-generator\\backend\\experiments\\results\\quality_presentations\\eval-c564fff0fbfc4e00bd46_version-a.pptx",
+      "original_pptx_path": "C:\\CSE\\final_year\\aimlt\\ppt-generator\\backend\\experiments\\results\\quality_presentations\\renewable_energy_original.pptx"
+    },
+    {
+      "evaluation_id": "eval-b5009fde2dfc418a9ae5",
+      "experiment_id": "exp-8a5f09ceec7246938b6629100bc327e9",
+      "case_id": "renewable_energy_local_structure",
+      "presentation_case_id": "renewable_energy",
+      "modification_request": "Restructure slide 4 into a concise list of the main benefits and practical challenges of renewable energy.",
+      "method": "full",
+      "original_presentation_id": "exp-8a5f09ceec7246938b6629100bc327e9-renewable_energy",
+      "output_pptx_path": "C:\\CSE\\final_year\\aimlt\\ppt-generator\\backend\\generated\\full_regeneration_c5d468c9026e4375b0f638762503bf21.pptx",
+      "affected_slide_ids": [
+        "slide-1",
+        "slide-2",
+        "slide-3",
+        "slide-4",
+        "slide-5"
+      ],
+      "quality_status": "pending",
+      "blinded_pptx_path": "C:\\CSE\\final_year\\aimlt\\ppt-generator\\backend\\experiments\\results\\quality_presentations\\eval-b5009fde2dfc418a9ae5_version-b.pptx",
+      "original_pptx_path": "C:\\CSE\\final_year\\aimlt\\ppt-generator\\backend\\experiments\\results\\quality_presentations\\renewable_energy_original.pptx"
+    },
+    {
+      "evaluation_id": "eval-d5325f1583d141718ee2",
+      "experiment_id": "exp-8a5f09ceec7246938b6629100bc327e9",
+      "case_id": "sustainable_ecommerce_local_content",
+      "presentation_case_id": "sustainable_ecommerce",
+      "modification_request": "Change slide 3 to focus on lower-impact packaging options for e-commerce.",
+      "method": "selective",
+      "original_presentation_id": "exp-8a5f09ceec7246938b6629100bc327e9-sustainable_ecommerce",
+      "output_pptx_path": "C:\\CSE\\final_year\\aimlt\\ppt-generator\\backend\\generated\\selective_regeneration_e06095ee06de442b93fee0a8cad6d24c.pptx",
+      "affected_slide_ids": [
+        "slide-3"
+      ],
+      "quality_status": "pending",
+      "blinded_pptx_path": "C:\\CSE\\final_year\\aimlt\\ppt-generator\\backend\\experiments\\results\\quality_presentations\\eval-d5325f1583d141718ee2_version-a.pptx",
+      "original_pptx_path": "C:\\CSE\\final_year\\aimlt\\ppt-generator\\backend\\experiments\\results\\quality_presentations\\sustainable_ecommerce_original.pptx"
+    },
+    {
+      "evaluation_id": "eval-7fc8919064a44f959961",
+      "experiment_id": "exp-8a5f09ceec7246938b6629100bc327e9",
+      "case_id": "sustainable_ecommerce_local_content",
+      "presentation_case_id": "sustainable_ecommerce",
+      "modification_request": "Change slide 3 to focus on lower-impact packaging options for e-commerce.",
+      "method": "full",
+      "original_presentation_id": "exp-8a5f09ceec7246938b6629100bc327e9-sustainable_ecommerce",
+      "output_pptx_path": "C:\\CSE\\final_year\\aimlt\\ppt-generator\\backend\\generated\\full_regeneration_dc02c94105184621acd91fb4efb45161.pptx",
+      "affected_slide_ids": [
+        "slide-1",
+        "slide-2",
+        "slide-3",
+        "slide-4",
+        "slide-5"
+      ],
+      "quality_status": "pending",
+      "blinded_pptx_path": "C:\\CSE\\final_year\\aimlt\\ppt-generator\\backend\\experiments\\results\\quality_presentations\\eval-7fc8919064a44f959961_version-b.pptx",
+      "original_pptx_path": "C:\\CSE\\final_year\\aimlt\\ppt-generator\\backend\\experiments\\results\\quality_presentations\\sustainable_ecommerce_original.pptx"
+    },
+    {
+      "evaluation_id": "eval-c5ff0aab804441d88da6",
+      "experiment_id": "exp-8a5f09ceec7246938b6629100bc327e9",
+      "case_id": "sustainable_ecommerce_local_structure",
+      "presentation_case_id": "sustainable_ecommerce",
+      "modification_request": "Restructure slide 4 to compare the benefits and trade-offs of sustainable delivery choices.",
+      "method": "selective",
+      "original_presentation_id": "exp-8a5f09ceec7246938b6629100bc327e9-sustainable_ecommerce",
+      "output_pptx_path": "C:\\CSE\\final_year\\aimlt\\ppt-generator\\backend\\generated\\selective_regeneration_59cafdb1e3c147d0921315b02ab2ab63.pptx",
+      "affected_slide_ids": [
+        "slide-4"
+      ],
+      "quality_status": "pending",
+      "blinded_pptx_path": "C:\\CSE\\final_year\\aimlt\\ppt-generator\\backend\\experiments\\results\\quality_presentations\\eval-c5ff0aab804441d88da6_version-a.pptx",
+      "original_pptx_path": "C:\\CSE\\final_year\\aimlt\\ppt-generator\\backend\\experiments\\results\\quality_presentations\\sustainable_ecommerce_original.pptx"
+    },
+    {
+      "evaluation_id": "eval-90e94dfe044b4124aa63",
+      "experiment_id": "exp-8a5f09ceec7246938b6629100bc327e9",
+      "case_id": "sustainable_ecommerce_local_structure",
+      "presentation_case_id": "sustainable_ecommerce",
+      "modification_request": "Restructure slide 4 to compare the benefits and trade-offs of sustainable delivery choices.",
+      "method": "full",
+      "original_presentation_id": "exp-8a5f09ceec7246938b6629100bc327e9-sustainable_ecommerce",
+      "output_pptx_path": "C:\\CSE\\final_year\\aimlt\\ppt-generator\\backend\\generated\\full_regeneration_6b19bd8c0dad4a4481bbdd9c314b0242.pptx",
+      "affected_slide_ids": [
+        "slide-1",
+        "slide-2",
+        "slide-3",
+        "slide-4",
+        "slide-5"
+      ],
+      "quality_status": "pending",
+      "blinded_pptx_path": "C:\\CSE\\final_year\\aimlt\\ppt-generator\\backend\\experiments\\results\\quality_presentations\\eval-90e94dfe044b4124aa63_version-b.pptx",
+      "original_pptx_path": "C:\\CSE\\final_year\\aimlt\\ppt-generator\\backend\\experiments\\results\\quality_presentations\\sustainable_ecommerce_original.pptx"
+    }
+  ]
+}

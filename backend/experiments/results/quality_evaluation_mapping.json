@@ -1,0 +1,105 @@
+{
+  "experiment_id": "exp-8a5f09ceec7246938b6629100bc327e9",
+  "mappings": [
+    {
+      "evaluation_id": "eval-e32710a773f147668e8c",
+      "blinded_label": "Version A",
+      "actual_method": "selective"
+    },
+    {
+      "evaluation_id": "eval-cd3eeb7879bd4247993c",
+      "blinded_label": "Version B",
+      "actual_method": "full"
+    },
+    {
+      "evaluation_id": "eval-e506697ed86547e6a5e5",
+      "blinded_label": "Version A",
+      "actual_method": "selective"
+    },
+    {
+      "evaluation_id": "eval-85f817b53a30408fb490",
+      "blinded_label": "Version B",
+      "actual_method": "full"
+    },
+    {
+      "evaluation_id": "eval-85aebd130a564cfa8b89",
+      "blinded_label": "Version B",
+      "actual_method": "selective"
+    },
+    {
+      "evaluation_id": "eval-c3bf5b2d1dc24fc88705",
+      "blinded_label": "Version A",
+      "actual_method": "full"
+    },
+    {
+      "evaluation_id": "eval-f2598675195f4e14b2d9",
+      "blinded_label": "Version B",
+      "actual_method": "selective"
+    },
+    {
+      "evaluation_id": "eval-d092ae6328d2469cbd08",
+      "blinded_label": "Version A",
+      "actual_method": "full"
+    },
+    {
+      "evaluation_id": "eval-c6994374b2424b39ab6c",
+      "blinded_label": "Version A",
+      "actual_method": "selective"
+    },
+    {
+      "evaluation_id": "eval-72859f4334134a67ae60",
+      "blinded_label": "Version B",
+      "actual_method": "full"
+    },
+    {
+      "evaluation_id": "eval-e687642d891c4469813d",
+      "blinded_label": "Version A",
+      "actual_method": "selective"
+    },
+    {
+      "evaluation_id": "eval-d5e17761bacf42e0947b",
+      "blinded_label": "Version B",
+      "actual_method": "full"
+    },
+    {
+      "evaluation_id": "eval-c6b8992a48204b0ea3a4",
+      "blinded_label": "Version B",
+      "actual_method": "selective"
+    },
+    {
+      "evaluation_id": "eval-229a8f0a40914379b668",
+      "blinded_label": "Version A",
+      "actual_method": "full"
+    },
+    {
+      "evaluation_id": "eval-c564fff0fbfc4e00bd46",
+      "blinded_label": "Version A",
+      "actual_method": "selective"
+    },
+    {
+      "evaluation_id": "eval-b5009fde2dfc418a9ae5",
+      "blinded_label": "Version B",
+      "actual_method": "full"
+    },
+    {
+      "evaluation_id": "eval-d5325f1583d141718ee2",
+      "blinded_label": "Version A",
+      "actual_method": "selective"
+    },
+    {
+      "evaluation_id": "eval-7fc8919064a44f959961",
+      "blinded_label": "Version B",
+      "actual_method": "full"
+    },
+    {
+      "evaluation_id": "eval-c5ff0aab804441d88da6",
+      "blinded_label": "Version A",
+      "actual_method": "selective"
+    },
+    {
+      "evaluation_id": "eval-90e94dfe044b4124aa63",
+      "blinded_label": "Version B",
+      "actual_method": "full"
+    }
+  ]
+}
