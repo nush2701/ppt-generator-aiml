@@ -4,6 +4,7 @@
 !.env.example
 !**/.env.example
 frontend/.env.local
+backend/.env
 
 # Private keys and credential files
 *.pem
@@ -15,6 +16,9 @@ secrets.json
 
 # Generated PowerPoint files stay local
 *.pptx
+
+# Handoff documents stay local
+*.docx
 
 # Python
 __pycache__/

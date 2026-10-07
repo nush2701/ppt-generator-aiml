@@ -51,6 +51,10 @@ function getHttpErrorMessage(status: number): string {
   return "Presentation generation failed. Please try again.";
 }
 
+export function fileDownloadUrl(fileName: string): string {
+  return `${API_BASE_URL}/api/files/${encodeURIComponent(fileName)}`;
+}
+
 export async function generatePresentation(
   prompt: string,
 ): Promise<GenerationResponse> {

@@ -5,6 +5,7 @@ import os
 from uuid import uuid4
 
 from fastapi import APIRouter, HTTPException
+from fastapi.responses import FileResponse
 from pydantic import ValidationError
 
 from app.llm.gemini_provider import GeminiProvider, GeminiProviderError
@@ -27,6 +28,8 @@ from app.services.selective_regenerator import SelectiveRegenerator
 
 
 router = APIRouter()
+
+GENERATED_DIR = Path(__file__).resolve().parents[2] / "generated"
 
 
 def _record_provider_calls(collector: RunMetricsCollector, provider: GeminiProvider | None) -> None:
@@ -109,7 +112,7 @@ def modify(request: ModifyPresentationRequest) -> ModifyPresentationResponse:
         metrics.set_slide_counts(0, len(presentation.slides))
         requirements = PresentationRequirements.model_validate(presentation.metadata.root)
         next_version = current_version + 1
-        generated_dir = Path(__file__).resolve().parents[2] / "generated"
+        generated_dir = GENERATED_DIR
         output_path = generated_dir / f"presentation_{presentation.id}_v{next_version}.pptx"
         provider = GeminiProvider()
         result = SelectiveRegenerator(provider).selectively_regenerate(
@@ -187,7 +190,7 @@ def modify_full(request: ModifyPresentationRequest) -> FullModifyPresentationRes
         metrics.set_slide_counts(0, len(presentation.slides))
         requirements = PresentationRequirements.model_validate(presentation.metadata.root)
         next_version = current_version + 1
-        generated_dir = Path(__file__).resolve().parents[2] / "generated"
+        generated_dir = GENERATED_DIR
         output_path = generated_dir / f"full_regeneration_{uuid4().hex}.pptx"
         provider = GeminiProvider()
         result = FullRegenerator(provider).fully_regenerate(
@@ -247,3 +250,14 @@ def modify_full(request: ModifyPresentationRequest) -> FullModifyPresentationRes
     finally:
         _record_provider_calls(metrics, provider)
         metrics.finish(status)
+
+
+@router.get("/files/{file_name}")
+def download_file(file_name: str) -> FileResponse:
+    """Serve a generated .pptx from the generated directory."""
+    if not file_name.endswith(".pptx") or Path(file_name).name != file_name:
+        raise HTTPException(status_code=404, detail="File not found")
+    file_path = GENERATED_DIR / file_name
+    if not file_path.is_file():
+        raise HTTPException(status_code=404, detail="File not found")
+    return FileResponse(file_path, filename=file_name)

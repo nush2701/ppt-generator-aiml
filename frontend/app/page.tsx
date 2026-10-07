@@ -3,6 +3,7 @@
 import { FormEvent, useState } from "react";
 import Link from "next/link";
 import {
+  fileDownloadUrl,
   generatePresentation,
   GenerationResponse,
 } from "../lib/api";
@@ -108,6 +109,13 @@ export default function Home() {
                 <div className="file-path"><span>Saved at</span><strong>{result.file_path}</strong></div>
               </div>
               <p className="success-message">Your presentation was generated successfully.</p>
+              <a
+                className="generate-button"
+                href={fileDownloadUrl(result.file_name)}
+                download={result.file_name}
+              >
+                Download PowerPoint <span aria-hidden="true">↓</span>
+              </a>
             </div>
           </section>
         )}

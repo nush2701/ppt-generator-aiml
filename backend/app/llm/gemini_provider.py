@@ -1,11 +1,15 @@
 """Minimal Gemini provider used to verify structured API responses."""
 
 import os
+from pathlib import Path
 
+from dotenv import load_dotenv
 from google import genai
 from pydantic import BaseModel, ValidationError
 
 from app.llm.provider import LLMCallUsage, ModelT
+
+load_dotenv(Path(__file__).resolve().parents[2] / ".env")
 
 
 class GeminiProviderError(RuntimeError):
