@@ -50,6 +50,7 @@ button, textarea { font: inherit; }
 .workspace { max-width: 790px; margin: 0 auto; }
 .prompt-card, .result-card { border: 1px solid var(--line); border-radius: 17px; background: rgba(255,255,255,.94); box-shadow: 0 16px 48px rgba(29, 48, 78, .07); }
 .prompt-card { padding: 27px 30px 25px; }
+.modify-card { margin-top: 17px; }
 .card-heading { display: flex; justify-content: space-between; align-items: center; margin-bottom: 19px; }
 .step-label { margin-bottom: 8px; color: #75849a; font-size: 10px; letter-spacing: .14em; }
 .step-label span { margin-left: 7px; color: #abb6c5; }

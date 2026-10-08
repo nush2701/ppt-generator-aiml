@@ -6,13 +6,44 @@ import {
   fileDownloadUrl,
   generatePresentation,
   GenerationResponse,
+  modifyPresentation,
+  ModifyPresentationResponse,
 } from "../lib/api";
+
+function slideLabel(slideId: string): string {
+  const match = /^slide-(\d+)$/.exec(slideId);
+  return match ? `Slide ${match[1]}` : slideId;
+}
+
+function formatSlides(slideIds: string[]): string {
+  return slideIds.map(slideLabel).join(", ");
+}
+
+function versionLabel(fileName: string): string | null {
+  return /_(v\d+)\.pptx$/.exec(fileName)?.[1] ?? null;
+}
+
+function selectiveSummary(response: ModifyPresentationResponse): string {
+  const regenerated = response.regenerated_slides.map(slideLabel);
+  if (regenerated.length === 0) return response.message;
+  const subject =
+    regenerated.length === 1 ? `${regenerated[0]} was` : `${regenerated.join(", ")} were`;
+  const preserved = response.preserved_slides.length;
+  if (preserved === 0) return `${subject} regenerated.`;
+  return `${subject} regenerated while the remaining ${preserved} slide${
+    preserved === 1 ? " was" : "s were"
+  } preserved.`;
+}
 
 export default function Home() {
   const [prompt, setPrompt] = useState("");
   const [isGenerating, setIsGenerating] = useState(false);
   const [result, setResult] = useState<GenerationResponse | null>(null);
   const [error, setError] = useState<string | null>(null);
+  const [modification, setModification] = useState("");
+  const [isModifying, setIsModifying] = useState(false);
+  const [modifyResult, setModifyResult] = useState<ModifyPresentationResponse | null>(null);
+  const [modifyError, setModifyError] = useState<string | null>(null);
 
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -21,6 +52,8 @@ export default function Home() {
     setIsGenerating(true);
     setError(null);
     setResult(null);
+    setModifyResult(null);
+    setModifyError(null);
     try {
       setResult(await generatePresentation(prompt.trim()));
     } catch (requestError) {
@@ -31,6 +64,28 @@ export default function Home() {
       );
     } finally {
       setIsGenerating(false);
+    }
+  }
+
+  async function handleModify(event: FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    if (!result || !modification.trim() || isModifying) return;
+
+    setIsModifying(true);
+    setModifyError(null);
+    setModifyResult(null);
+    try {
+      setModifyResult(
+        await modifyPresentation(result.presentation_id, modification.trim()),
+      );
+    } catch (requestError) {
+      setModifyError(
+        requestError instanceof Error
+          ? requestError.message
+          : "Modification failed. Please try again.",
+      );
+    } finally {
+      setIsModifying(false);
     }
   }
 
@@ -111,11 +166,104 @@ export default function Home() {
               <p className="success-message">Your presentation was generated successfully.</p>
               <a
                 className="generate-button"
-                href={fileDownloadUrl(result.file_name)}
-                download={result.file_name}
+                href={fileDownloadUrl(modifyResult?.file_name ?? result.file_name)}
+                download={modifyResult?.file_name ?? result.file_name}
               >
                 Download PowerPoint <span aria-hidden="true">↓</span>
               </a>
+            </div>
+          </section>
+        )}
+
+        {result && (
+          <section className="prompt-card modify-card" aria-labelledby="modify-heading">
+            <div className="card-heading">
+              <div>
+                <p className="step-label">REFINE YOUR DECK <span>02</span></p>
+                <h2 id="modify-heading">Modify your presentation</h2>
+              </div>
+              <div className="document-icon" aria-hidden="true">✎</div>
+            </div>
+            <form onSubmit={handleModify}>
+              <label className="sr-only" htmlFor="modification-prompt">What would you like to change?</label>
+              <textarea
+                id="modification-prompt"
+                value={modification}
+                onChange={(event) => setModification(event.target.value)}
+                placeholder="Change slide 3 to compare solar and wind energy using clear, concise points."
+                maxLength={20_000}
+                disabled={isModifying}
+              />
+              <div className="form-footer">
+                <span className="input-hint">
+                  Selective regeneration: only the slides that need to change are rebuilt, the rest are preserved.
+                </span>
+                <span className="character-count">{modification.length.toLocaleString()} / 20,000</span>
+              </div>
+              <button
+                className="generate-button"
+                type="submit"
+                disabled={isModifying || !modification.trim()}
+              >
+                {isModifying ? (
+                  <><span className="spinner" aria-hidden="true" /> Applying modification…</>
+                ) : (
+                  <>Apply Modification <span aria-hidden="true">→</span></>
+                )}
+              </button>
+              {isModifying && (
+                <p className="loading-note" role="status">Applying your modification. This may take a little while.</p>
+              )}
+            </form>
+          </section>
+        )}
+
+        {modifyError && (
+          <section className="result-card error-card" role="alert">
+            <div className="result-icon error-icon" aria-hidden="true">!</div>
+            <div><h2>We couldn’t apply your modification</h2><p>{modifyError}</p></div>
+          </section>
+        )}
+
+        {modifyResult && modifyResult.status === "regenerated" && modifyResult.file_name && (
+          <section className="result-card success-card" aria-live="polite">
+            <div className="result-icon success-icon" aria-hidden="true">✓</div>
+            <div className="result-content">
+              <p className="success-kicker">Modification applied</p>
+              <h2>{modifyResult.title}</h2>
+              <div className="result-details">
+                <div>
+                  <span>Affected slide{modifyResult.affected_slides.length === 1 ? "" : "s"}</span>
+                  <strong>{formatSlides(modifyResult.affected_slides)}</strong>
+                </div>
+                <div>
+                  <span>New version created</span>
+                  <strong>{versionLabel(modifyResult.file_name) ?? modifyResult.file_name}</strong>
+                </div>
+                <div className="file-path"><span>Updated file</span><strong>{modifyResult.file_name}</strong></div>
+              </div>
+              <p className="success-message">{selectiveSummary(modifyResult)}</p>
+              <a
+                className="generate-button"
+                href={fileDownloadUrl(modifyResult.file_name)}
+                download={modifyResult.file_name}
+              >
+                Download Updated PowerPoint <span aria-hidden="true">↓</span>
+              </a>
+            </div>
+          </section>
+        )}
+
+        {modifyResult && modifyResult.status !== "regenerated" && (
+          <section className="result-card error-card" role="alert">
+            <div className="result-icon error-icon" aria-hidden="true">!</div>
+            <div>
+              <h2>
+                {modifyResult.status === "clarification_needed"
+                  ? "We need a more specific request"
+                  : "This change affects the whole presentation"}
+              </h2>
+              <p>{modifyResult.message}</p>
             </div>
           </section>
         )}
