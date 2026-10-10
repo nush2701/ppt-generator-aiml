@@ -43,6 +43,18 @@ class ComponentType(StrEnum):
     TIMELINE = "timeline"
 
 
+LAYOUT_COMPONENT_RULES = """- `title`: a title component and optionally a short text subtitle.
+- `title_bullets`: a title component and a concise bullet_list component.
+- `two_column`: a title component and two text or card components, one for each column.
+- `comparison`: a title component and comparison content using a table or suitable cards/text.
+- `three_card`: a title component and three concise card components.
+- `image_text`: a title, an image component describing the intended image subject as a placeholder, and a related text component. Do not create or link an image.
+- `timeline`: a title component and a timeline component with concise ordered steps. Do not invent dates.
+- `statistic`: a title and a statistic component. Do not invent numeric values; use only figures supplied in the requirements or plan context, or express a supported metric qualitatively.
+- `conclusion`: a title and concise concluding text or a short bullet_list.
+- If a planned layout needs a different valid combination to represent its purpose, keep the content semantically appropriate while using only allowed component types."""
+
+
 class SlideComponent(BaseModel):
     """A stable, typed piece of slide content with JSON-compatible data."""
 

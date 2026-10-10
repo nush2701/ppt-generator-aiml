@@ -43,16 +43,18 @@ export default function Home() {
   const [modification, setModification] = useState("");
   const [isModifying, setIsModifying] = useState(false);
   const [modifyResult, setModifyResult] = useState<ModifyPresentationResponse | null>(null);
+  const [lastModifiedResult, setLastModifiedResult] = useState<ModifyPresentationResponse | null>(null);
   const [modifyError, setModifyError] = useState<string | null>(null);
 
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
-    if (!prompt.trim() || isGenerating) return;
+    if (!prompt.trim() || isGenerating || isModifying) return;
 
     setIsGenerating(true);
     setError(null);
     setResult(null);
     setModifyResult(null);
+    setLastModifiedResult(null);
     setModifyError(null);
     try {
       setResult(await generatePresentation(prompt.trim()));
@@ -69,15 +71,16 @@ export default function Home() {
 
   async function handleModify(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
-    if (!result || !modification.trim() || isModifying) return;
+    if (!result || !modification.trim() || isModifying || isGenerating) return;
 
     setIsModifying(true);
     setModifyError(null);
-    setModifyResult(null);
     try {
-      setModifyResult(
-        await modifyPresentation(result.presentation_id, modification.trim()),
-      );
+      const response = await modifyPresentation(result.presentation_id, modification.trim());
+      setModifyResult(response);
+      if (response.status === "regenerated" && response.file_name) {
+        setLastModifiedResult(response);
+      }
     } catch (requestError) {
       setModifyError(
         requestError instanceof Error
@@ -125,14 +128,14 @@ export default function Home() {
             onChange={(event) => setPrompt(event.target.value)}
             placeholder="Create a 6-slide professional presentation about renewable energy for college students..."
             maxLength={20_000}
-            disabled={isGenerating}
+            disabled={isGenerating || isModifying}
             required
           />
           <div className="form-footer">
             <span className="input-hint">A few details about your audience and goals help shape the deck.</span>
             <span className="character-count">{prompt.length.toLocaleString()} / 20,000</span>
           </div>
-          <button className="generate-button" type="submit" disabled={isGenerating || !prompt.trim()}>
+          <button className="generate-button" type="submit" disabled={isGenerating || isModifying || !prompt.trim()}>
             {isGenerating ? (
               <><span className="spinner" aria-hidden="true" /> Generating presentation…</>
             ) : (
@@ -166,8 +169,8 @@ export default function Home() {
               <p className="success-message">Your presentation was generated successfully.</p>
               <a
                 className="generate-button"
-                href={fileDownloadUrl(modifyResult?.file_name ?? result.file_name)}
-                download={modifyResult?.file_name ?? result.file_name}
+                href={fileDownloadUrl(result.file_name)}
+                download={result.file_name}
               >
                 Download PowerPoint <span aria-hidden="true">↓</span>
               </a>
@@ -192,7 +195,7 @@ export default function Home() {
                 onChange={(event) => setModification(event.target.value)}
                 placeholder="Change slide 3 to compare solar and wind energy using clear, concise points."
                 maxLength={20_000}
-                disabled={isModifying}
+                disabled={isModifying || isGenerating}
               />
               <div className="form-footer">
                 <span className="input-hint">
@@ -203,7 +206,7 @@ export default function Home() {
               <button
                 className="generate-button"
                 type="submit"
-                disabled={isModifying || !modification.trim()}
+                disabled={isModifying || isGenerating || !modification.trim()}
               >
                 {isModifying ? (
                   <><span className="spinner" aria-hidden="true" /> Applying modification…</>
@@ -225,28 +228,28 @@ export default function Home() {
           </section>
         )}
 
-        {modifyResult && modifyResult.status === "regenerated" && modifyResult.file_name && (
+        {lastModifiedResult && lastModifiedResult.file_name && (
           <section className="result-card success-card" aria-live="polite">
             <div className="result-icon success-icon" aria-hidden="true">✓</div>
             <div className="result-content">
               <p className="success-kicker">Modification applied</p>
-              <h2>{modifyResult.title}</h2>
+              <h2>{lastModifiedResult.title}</h2>
               <div className="result-details">
                 <div>
-                  <span>Affected slide{modifyResult.affected_slides.length === 1 ? "" : "s"}</span>
-                  <strong>{formatSlides(modifyResult.affected_slides)}</strong>
+                  <span>Affected slide{lastModifiedResult.affected_slides.length === 1 ? "" : "s"}</span>
+                  <strong>{formatSlides(lastModifiedResult.affected_slides)}</strong>
                 </div>
                 <div>
                   <span>New version created</span>
-                  <strong>{versionLabel(modifyResult.file_name) ?? modifyResult.file_name}</strong>
+                  <strong>{versionLabel(lastModifiedResult.file_name) ?? lastModifiedResult.file_name}</strong>
                 </div>
-                <div className="file-path"><span>Updated file</span><strong>{modifyResult.file_name}</strong></div>
+                <div className="file-path"><span>Updated file</span><strong>{lastModifiedResult.file_name}</strong></div>
               </div>
-              <p className="success-message">{selectiveSummary(modifyResult)}</p>
+              <p className="success-message">{selectiveSummary(lastModifiedResult)}</p>
               <a
                 className="generate-button"
-                href={fileDownloadUrl(modifyResult.file_name)}
-                download={modifyResult.file_name}
+                href={fileDownloadUrl(lastModifiedResult.file_name)}
+                download={lastModifiedResult.file_name}
               >
                 Download Updated PowerPoint <span aria-hidden="true">↓</span>
               </a>

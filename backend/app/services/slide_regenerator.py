@@ -6,7 +6,14 @@ from app.llm.gemini_provider import GeminiProvider
 from app.llm.provider import LLMProvider
 from app.models.change import ChangeType
 from app.models.plan import PlannedSlide
-from app.models.presentation import Presentation, Slide
+from app.models.presentation import (
+    ComponentType,
+    LAYOUT_COMPONENT_RULES,
+    Presentation,
+    Slide,
+    SlideComponent,
+    SlideLayout,
+)
 from app.models.requirements import PresentationRequirements
 
 
@@ -96,11 +103,15 @@ RULES
 - Return valid non-empty components and content; component IDs must be non-empty and unique within this slide.
 - Reuse existing component IDs when their role remains the same; new component IDs should start with `{current_slide.id}-`.
 
+LAYOUT / COMPONENT RULES
+{LAYOUT_COMPONENT_RULES}
+
 STRUCTURED OUTPUT
 Return one JSON object matching the Slide schema. Do not add markdown or text outside the JSON."""
 
-    @staticmethod
+    @classmethod
     def _validate_replacement(
+        cls,
         replacement: Slide,
         current_slide: Slide,
         allow_layout_change: bool,
@@ -122,8 +133,57 @@ Return one JSON object matching the Slide schema. Do not add markdown or text ou
             if component.id in ids:
                 raise ValueError(f"Regenerated slide contains duplicate component ID: {component.id}.")
             ids.add(component.id)
-            if not SlideRegenerator._has_nonempty_content(component.content):
+            if not cls._has_nonempty_content(component.content):
                 raise ValueError(f"Regenerated component {component.id} has empty content.")
+
+        cls._validate_layout_specific_content(replacement)
+
+    @classmethod
+    def _validate_layout_specific_content(cls, slide: Slide) -> None:
+        """Layout-aware validation: ensure non-title layouts contain valid body content."""
+        if slide.layout == SlideLayout.TITLE:
+            # Title-only slides are valid; title component is verified if present
+            return
+
+        body_components = [c for c in slide.components if c.type != ComponentType.TITLE]
+        if not body_components:
+            raise ValueError(f"Slide '{slide.id}' with layout '{slide.layout.value}' requires body components.")
+
+        has_meaningful_body = False
+        for comp in body_components:
+            if cls._has_meaningful_body_content(comp):
+                has_meaningful_body = True
+                break
+
+        if not has_meaningful_body:
+            raise ValueError(
+                f"Slide '{slide.id}' with layout '{slide.layout.value}' has no meaningful body content."
+            )
+
+    @classmethod
+    def _has_meaningful_body_content(cls, component: SlideComponent) -> bool:
+        content = component.content
+        if isinstance(content, str):
+            return bool(content.strip())
+        if isinstance(content, list):
+            return any(cls._has_nonempty_content(item) for item in content)
+        if isinstance(content, dict):
+            # Check if there is body content beyond just title/label keys
+            body_keys = (
+                "text", "description", "summary", "value",
+                "items", "bullets", "points", "lines", "rows", "columns", "values", "context",
+            )
+            for k in body_keys:
+                if k in content and cls._has_nonempty_content(content[k]):
+                    return True
+            non_heading_vals = [
+                v for k, v in content.items()
+                if k not in ("title", "heading", "header", "name", "label") and cls._has_nonempty_content(v)
+            ]
+            if non_heading_vals:
+                return True
+            return False
+        return content is not None
 
     @staticmethod
     def _has_nonempty_content(value: object) -> bool:

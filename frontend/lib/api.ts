@@ -95,6 +95,12 @@ function getHttpErrorMessage(
   status: number,
   subject = "Presentation generation",
 ): string {
+  if (status === 404) {
+    return "The requested presentation could not be found. Please generate a new presentation.";
+  }
+  if (status === 400) {
+    return "The request was invalid. Please check your prompt and try again.";
+  }
   if (status === 422) {
     return "Please check your prompt. It must contain between 1 and 20,000 characters.";
   }

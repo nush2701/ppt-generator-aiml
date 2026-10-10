@@ -31,11 +31,22 @@ def component_text(component: SlideComponent) -> str:
     if isinstance(value, Sequence) and not isinstance(value, (str, bytes)):
         return "\n".join(_value_text(item) for item in value)
     if isinstance(value, Mapping):
-        for key in ("text", "title", "label", "value", "description", "context"):
+        if component.type == ComponentType.TITLE:
+            for key in ("title", "text", "heading", "header", "name", "label", "value"):
+                item = value.get(key)
+                if item is not None and str(item).strip():
+                    return _value_text(item)
+        if component.type == ComponentType.BULLET_LIST:
+            items = bullet_items(component)
+            if items:
+                return "\n".join(items)
+        for key in ("text", "description", "summary", "content", "value", "items", "bullets", "points", "title", "label", "context"):
             item = value.get(key)
-            if item is not None:
+            if item is not None and str(item).strip():
+                if isinstance(item, Sequence) and not isinstance(item, (str, bytes)):
+                    return "\n".join(_value_text(i) for i in item if _value_text(i).strip())
                 return _value_text(item)
-        return "\n".join(_value_text(item) for item in value.values())
+        return "\n".join(_value_text(item) for item in value.values() if _value_text(item).strip())
     return str(value) if value is not None else ""
 
 
@@ -107,7 +118,12 @@ def bullet_items(component: SlideComponent | None) -> list[str]:
         return []
     content = component.content
     if isinstance(content, Mapping):
-        content = content.get("items", content.get("bullets", content.get("text", [])))
+        for key in ("items", "bullets", "points", "lines", "list", "text", "values", "content"):
+            if key in content and content[key]:
+                content = content[key]
+                break
+        else:
+            content = []
     if isinstance(content, Sequence) and not isinstance(content, (str, bytes)):
         return [_value_text(item) for item in content if _value_text(item).strip()]
     return [line.strip(" •-\t") for line in str(content).splitlines() if line.strip(" •-\t")]
@@ -150,44 +166,47 @@ def render_layout(slide, model: Slide, presentation_title: str) -> None:
     body = _body_components(model)
     if layout == SlideLayout.CONCLUSION:
         bullet = find_component(model, ComponentType.BULLET_LIST)
-        text_components = [c for c in body if c.type == ComponentType.TEXT]
+        text_components = [c for c in body if c.type in (ComponentType.TEXT, ComponentType.CARD)]
         summary = "\n\n".join(component_text(c) for c in text_components if component_text(c).strip())
-        if bullet and summary:
+        items = bullet_items(bullet) if bullet else []
+        if items and summary:
             summary_box = add_text(slide, summary, 1.0, 1.55, 11.0, 1.75, 20, INK)
             summary_box.text_frame.auto_size = MSO_AUTO_SIZE.TEXT_TO_FIT_SHAPE
-            _add_bullets(slide, bullet_items(bullet), 1.0, 3.45, 10.8, 2.85, 19)
-        elif bullet:
-            _add_bullets(slide, bullet_items(bullet), 1.0, 1.55, 10.8, 4.9, 21)
+            _add_bullets(slide, items, 1.0, 3.45, 10.8, 2.85, 19)
+        elif items:
+            _add_bullets(slide, items, 1.0, 1.55, 10.8, 4.9, 21)
         elif summary:
             summary_box = add_text(slide, summary, 1.0, 1.65, 11.0, 4.8, 22, INK)
             summary_box.text_frame.auto_size = MSO_AUTO_SIZE.TEXT_TO_FIT_SHAPE
+        _ensure_slide_has_body_content(slide, model)
         return
 
     if layout == SlideLayout.TITLE_BULLETS:
         bullet = find_component(model, ComponentType.BULLET_LIST)
-        items = bullet_items(bullet) if bullet else [component_text(c) for c in body if c.type == ComponentType.TEXT]
+        items = bullet_items(bullet) if bullet else [component_text(c) for c in body if c.type in (ComponentType.TEXT, ComponentType.CARD)]
         if items:
             _add_bullets(slide, items, 1.0, 1.65, 10.8, 4.9, 19)
+        _ensure_slide_has_body_content(slide, model)
         return
 
     if layout == SlideLayout.TWO_COLUMN:
         columns = [c for c in body if c.type in (ComponentType.TEXT, ComponentType.CARD, ComponentType.BULLET_LIST)]
-        mid = (len(columns) + 1) // 2
         for i, col in enumerate(columns[:2]):
             x = 0.8 if i == 0 else 6.85
             w = 5.65
-            heading = str(col.content.get("title", f"Perspective {i + 1}")) if isinstance(col.content, Mapping) else f"Perspective {i + 1}"
-            text = component_text(col)
+            heading, text = _card_content(col, i + 1)
             add_card(slide, x, 1.65, w, 4.9, heading, text, BLUE if i == 0 else TEAL)
+        _ensure_slide_has_body_content(slide, model)
         return
 
     if layout in (SlideLayout.THREE_CARD, SlideLayout.COMPARISON):
-        cards = [c for c in body if c.type in (ComponentType.CARD, ComponentType.TEXT, ComponentType.STATISTIC)]
         if layout == SlideLayout.COMPARISON:
             table = find_component(model, ComponentType.TABLE)
             if table:
                 _render_table(slide, table, 0.85, 1.65, 11.65, 4.95)
+                _ensure_slide_has_body_content(slide, model)
                 return
+        cards = [c for c in body if c.type in (ComponentType.CARD, ComponentType.TEXT, ComponentType.STATISTIC, ComponentType.BULLET_LIST)]
         cards = cards[:3]
         if not cards:
             cards = body[:3]
@@ -197,6 +216,7 @@ def render_layout(slide, model: Slide, presentation_title: str) -> None:
         for i, item in enumerate(cards):
             heading, body_text = _card_content(item, i + 1)
             add_card(slide, start + i * (width + gap), 1.95, width, 4.25, heading, body_text, [BLUE, TEAL, GOLD][i % 3])
+        _ensure_slide_has_body_content(slide, model)
         return
 
     if layout == SlideLayout.IMAGE_TEXT:
@@ -213,6 +233,7 @@ def render_layout(slide, model: Slide, presentation_title: str) -> None:
         text_components = [c for c in body if c.type not in (ComponentType.IMAGE,)]
         text = "\n\n".join(component_text(c) for c in text_components)
         add_text(slide, text or model.purpose, 6.8, 1.8, 5.65, 4.5, 18, INK)
+        _ensure_slide_has_body_content(slide, model)
         return
 
     if layout == SlideLayout.TIMELINE:
@@ -231,6 +252,7 @@ def render_layout(slide, model: Slide, presentation_title: str) -> None:
             dot = slide.shapes.add_shape(MSO_SHAPE.OVAL, Inches(1.22), Inches(yy + 0.03), Inches(0.3), Inches(0.3))
             dot.fill.solid(); dot.fill.fore_color.rgb = BLUE; dot.line.fill.background()
             add_text(slide, _value_text(item), 1.85, yy, 10.1, 0.68, 17, INK)
+        _ensure_slide_has_body_content(slide, model)
         return
 
     if layout == SlideLayout.STATISTIC:
@@ -247,6 +269,7 @@ def render_layout(slide, model: Slide, presentation_title: str) -> None:
         if context:
             context_box = add_text(slide, str(context), 2.0, 5.45, 9.3, 0.9, 15, MUTED, align=PP_ALIGN.CENTER)
             context_box.text_frame.auto_size = MSO_AUTO_SIZE.TEXT_TO_FIT_SHAPE
+        _ensure_slide_has_body_content(slide, model)
         return
 
     raise ValueError(f"Unsupported slide layout: {layout!r}")
@@ -313,24 +336,89 @@ def _render_table(slide, component: SlideComponent, x: float, y: float, w: float
 
 
 def _card_content(component: SlideComponent, position: int) -> tuple[str, str]:
-    """Return the provided title and text from a card component."""
+    """Return the provided title and text from a card, bullet-list, or text component."""
     content = component.content
     if isinstance(content, Mapping):
         nested = content.get("content")
         if isinstance(nested, Mapping):
             content = nested
-        title = content.get("title")
-        text = content.get("text", content.get("description", content.get("value", "")))
+        title = None
+        for key in ("title", "heading", "header", "name", "label"):
+            if key in content and content[key]:
+                title = content[key]
+                break
         heading = _value_text(title).strip() if title is not None else ""
-        if not heading:
-            heading = str(content.get("label", "")).strip()
-        return heading or f"Point {position}", _value_text(text)
-    if isinstance(content, Sequence) and not isinstance(content, (str, bytes)) and len(content) == 1 and isinstance(content[0], Mapping):
-        nested = content[0]
-        heading = _value_text(nested.get("title", nested.get("label", ""))).strip()
-        text = nested.get("text", nested.get("description", nested.get("value", "")))
-        return heading or f"Point {position}", _value_text(text)
+
+        body_parts: list[str] = []
+        # Check for direct text / description / summary / value
+        for key in ("text", "description", "summary", "value"):
+            if key in content and content[key]:
+                val = _value_text(content[key]).strip()
+                if val:
+                    body_parts.append(val)
+                break
+
+        # Check for bullet / list items
+        for key in ("items", "bullets", "points", "lines", "list", "values"):
+            if key in content and content[key]:
+                items = content[key]
+                if isinstance(items, Sequence) and not isinstance(items, (str, bytes)):
+                    for itm in items:
+                        t = _value_text(itm).strip()
+                        if t:
+                            body_parts.append(f"•  {t}" if not t.startswith("•") else t)
+                elif isinstance(items, str):
+                    for line in items.splitlines():
+                        t = line.strip(" •-\t")
+                        if t:
+                            body_parts.append(f"•  {t}")
+                break
+
+        body_text = "\n".join(body_parts)
+        if not body_text:
+            other_vals = [
+                f"{k.replace('_', ' ').capitalize()}: {_value_text(v)}"
+                for k, v in content.items()
+                if k not in ("title", "heading", "header", "name", "label") and _value_text(v).strip()
+            ]
+            if other_vals:
+                body_text = "\n".join(other_vals)
+            elif not heading:
+                body_text = component_text(component)
+
+        return heading or f"Point {position}", body_text
+
+    if isinstance(content, Sequence) and not isinstance(content, (str, bytes)):
+        if len(content) == 1 and isinstance(content[0], Mapping):
+            nested_comp = SlideComponent(
+                id=component.id,
+                type=component.type,
+                content=content[0],
+                properties=component.properties,
+            )
+            return _card_content(nested_comp, position)
+        bullets = [_value_text(item).strip() for item in content if _value_text(item).strip()]
+        body_text = "\n".join(f"•  {b}" if not b.startswith("•") else b for b in bullets)
+        return f"Point {position}", body_text
+
+    if isinstance(content, str):
+        return f"Point {position}", content.strip()
+
     return f"Point {position}", component_text(component)
+
+
+def _ensure_slide_has_body_content(slide, model: Slide) -> None:
+    """Defensive validation: confirm non-title slides contain non-empty rendered body content."""
+    for shape in slide.shapes:
+        if shape.has_table:
+            if any(cell.text.strip() for row in shape.table.rows for cell in row.cells):
+                return
+        elif shape.has_text_frame:
+            text = shape.text_frame.text.strip()
+            if shape.top is not None and shape.top > Inches(1.2) and text:
+                if not (len(text) <= 3 and text.isdigit()):
+                    return
+    raise ValueError(f"Slide '{model.id}' layout '{model.layout.value}' rendered with empty body content.")
 
 
 def _table_headers_and_columns(raw_headers: Any) -> tuple[list[str], list[list[Any]]]:
