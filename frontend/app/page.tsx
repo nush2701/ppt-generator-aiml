@@ -95,11 +95,10 @@ export default function Home() {
   return (
     <main className="app-shell">
       <header className="topbar">
-        <Link className="brand" href="/" aria-label="AI PowerPoint Generator home">
-          <span className="brand-mark" aria-hidden="true">P</span>
-          <span>Presentation Studio</span>
+        <Link className="brand" href="/" aria-label="Storydeck home">
+          <span className="brand-mark" aria-hidden="true"><span /></span>
+          <span>Storydeck</span>
         </Link>
-        <span className="status-chip"><span /> MVP preview</span>
       </header>
 
       <section className="hero" aria-labelledby="page-title">
